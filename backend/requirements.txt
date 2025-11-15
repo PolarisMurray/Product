@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+pydantic
+numpy
+pandas
+matplotlib
+seaborn
+python-docx
+reportlab
+httpx
+# rpy2 - Note: This package may require system dependencies (R installation)
+# Uncomment the line below if you have R installed and want to use RPy2
+# rpy2
+

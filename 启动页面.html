@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioReport Copilot - 启动页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .status {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        
+        .status-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .status-value {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .status-value.checking {
+            color: #ffa500;
+        }
+        
+        .status-value.success {
+            color: #4caf50;
+        }
+        
+        .status-value.error {
+            color: #f44336;
+        }
+        
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .button:active {
+            transform: translateY(0);
+        }
+        
+        .button.secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .button.secondary:hover {
+            background: #d0d0d0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            color: #856404;
+        }
+        
+        .instructions li {
+            margin: 5px 0;
+        }
+        
+        .links {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .link {
+            display: block;
+            color: #667eea;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+        
+        .link:hover {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🧬</div>
+        <h1>BioReport Copilot</h1>
+        <p class="subtitle">一键启动应用</p>
+        
+        <div class="status" id="status">
+            <div class="status-item">
+                <span class="status-label">后端服务器</span>
+                <span class="status-value checking" id="backend-status">检查中...</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">前端服务器</span>
+                <span class="status-value checking" id="frontend-status">检查中...</span>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 使用说明</h3>
+            <ol>
+                <li><strong>Windows用户</strong>: 双击 <code>启动应用.bat</code> 文件</li>
+                <li><strong>Mac/Linux用户</strong>: 双击 <code>启动应用.sh</code> 文件（或右键选择"打开"）</li>
+                <li>等待服务器启动完成</li>
+                <li>浏览器会自动打开应用</li>
+            </ol>
+        </div>
+        
+        <div>
+            <a href="http://localhost:5173" target="_blank" class="button" id="open-app-btn" style="display: none;">
+                🚀 打开应用
+            </a>
+            <a href="http://localhost:8000/docs" target="_blank" class="button secondary">
+                📚 查看API文档
+            </a>
+        </div>
+        
+        <div class="links">
+            <a href="http://localhost:8000/health" target="_blank" class="link">🔍 后端健康检查</a>
+            <a href="http://localhost:5173" target="_blank" class="link">🌐 前端应用 (http://localhost:5173)</a>
+            <a href="http://localhost:8000" target="_blank" class="link">🔧 后端API (http://localhost:8000)</a>
+        </div>
+    </div>
+    
+    <script>
+        // 检查服务器状态
+        async function checkBackend() {
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                if (response.ok) {
+                    document.getElementById('backend-status').textContent = '✅ 运行中';
+                    document.getElementById('backend-status').className = 'status-value success';
+                    return true;
+                }
+            } catch (e) {
+                document.getElementById('backend-status').textContent = '❌ 未运行';
+                document.getElementById('backend-status').className = 'status-value error';
+            }
+            return false;
+        }
+        
+        async function checkFrontend() {
+            try {
+                const response = await fetch('http://localhost:5173');
+                if (response.ok) {
+                    document.getElementById('frontend-status').textContent = '✅ 运行中';
+                    document.getElementById('frontend-status').className = 'status-value success';
+                    document.getElementById('open-app-btn').style.display = 'inline-block';
+                    return true;
+                }
+            } catch (e) {
+                document.getElementById('frontend-status').textContent = '❌ 未运行';
+                document.getElementById('frontend-status').className = 'status-value error';
+            }
+            return false;
+        }
+        
+        // 每2秒检查一次
+        setInterval(async () => {
+            await checkBackend();
+            await checkFrontend();
+        }, 2000);
+        
+        // 立即检查一次
+        checkBackend();
+        checkFrontend();
+    </script>
+</body>
+</html>
+
