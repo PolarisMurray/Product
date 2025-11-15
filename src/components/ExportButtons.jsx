@@ -19,7 +19,7 @@ function ExportButtons({ isExporting, onExport }) {
         {isExporting ? (
           <>
             <Loader2 className="w-5 h-5 animate-spin" />
-            <span>生成中...</span>
+            <span>Generating...</span>
           </>
         ) : (
           <>
@@ -44,7 +44,7 @@ function ExportButtons({ isExporting, onExport }) {
         {isExporting ? (
           <>
             <Loader2 className="w-5 h-5 animate-spin" />
-            <span>生成中...</span>
+            <span>Generating...</span>
           </>
         ) : (
           <>

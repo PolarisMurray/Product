@@ -64,12 +64,20 @@ AI Layer
 ✔ Upload DEG tables / enrichment results
 ✔ Auto-generate plots:
 
-* Volcano plot
-* PCA
-* Heatmap
-* Pathway enrichment visualizations
-  ✔ AI-generated results & discussion
-  ✔ Export scientific report (PDF/DOCX)
+* **Basic Analysis:**
+  * Volcano plot
+  * PCA (Principal Component Analysis)
+  * Heatmap
+  * Pathway enrichment visualizations
+
+* **Machine Learning Analysis (NEW!):**
+  * **Sample Classification:** SVM, Random Forest
+  * **Clustering:** Hierarchical Clustering, K-Means
+  * **Feature Selection:** Lasso, Ridge Regression
+  * All with automatic visualization (19+ charts)
+
+✔ AI-generated results & discussion
+✔ Export scientific report (PDF/DOCX)
 
 ### **2. Personal Genomics Mode**
 
@@ -221,6 +229,7 @@ uvicorn main:app --reload
 | Frontend       | React / Vite / Tailwind             |
 | Backend        | FastAPI                             |
 | Bioinformatics | Python (Pandas, NumPy, SciPy), RPy2 |
+| Machine Learning | scikit-learn (SVM, RF, Clustering, Lasso, Ridge) |
 | Visualization  | Matplotlib, Seaborn, Plotly         |
 | AI Narrative   | OpenAI API / LLMs                   |
 | Report Export  | python-docx / ReportLab             |

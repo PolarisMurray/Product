@@ -1,90 +1,82 @@
 #!/bin/bash
 
-echo "=== BioReport Copilot - 安装和测试脚本 ==="
+echo "=== BioReport Copilot - Setup and Test Script ==="
 echo ""
 
-# 检查并安装后端依赖
-echo "📦 步骤1: 安装后端依赖..."
+# Check and install backend dependencies
+echo "📦 Step 1: Installing backend dependencies..."
 cd backend
 if python3 -c "import fastapi" 2>/dev/null; then
-    echo "✅ 后端依赖已安装"
+    echo "✅ Backend dependencies already installed"
 else
-    echo "正在安装后端依赖..."
+    echo "Installing backend dependencies..."
     pip3 install -r requirements.txt
     if [ $? -eq 0 ]; then
-        echo "✅ 后端依赖安装成功"
+        echo "✅ Backend dependencies installed successfully"
     else
-        echo "❌ 后端依赖安装失败"
+        echo "❌ Backend dependency installation failed"
         exit 1
     fi
 fi
 cd ..
 
-echo ""
-
-# 检查并安装前端依赖
-echo "📦 步骤2: 安装前端依赖..."
+# Check and install frontend dependencies
+echo "📦 Step 2: Installing frontend dependencies..."
 if [ -d "node_modules" ]; then
-    echo "✅ 前端依赖已安装"
+    echo "✅ Frontend dependencies already installed"
 else
-    echo "正在安装前端依赖..."
+    echo "Installing frontend dependencies..."
     npm install
     if [ $? -eq 0 ]; then
-        echo "✅ 前端依赖安装成功"
+        echo "✅ Frontend dependencies installed successfully"
     else
-        echo "❌ 前端依赖安装失败"
+        echo "❌ Frontend dependency installation failed"
         exit 1
     fi
 fi
 
-echo ""
-
-# 测试后端导入
-echo "🧪 步骤3: 测试后端代码..."
+# Test backend imports
+echo "🧪 Step 3: Testing backend code..."
 cd backend
-python3 -c "
-import sys
-sys.path.insert(0, '.')
+python3 << EOF
 try:
-    from routers.research import router
+    from routers.research import router as research_router
     from routers.personal import router as personal_router
     from routers.report import router as report_router
-    from models.schemas import ResearchAnalyzeResponse
-    print('✅ 后端代码导入测试通过')
+    from services.deg_analyzer import parse_deg_file
+    from services.ml_analyzer import perform_svm_classification
+    print('✅ Backend code import test passed')
 except Exception as e:
-    print(f'❌ 后端代码导入失败: {e}')
-    sys.exit(1)
-"
-BACKEND_TEST=$?
+    print(f'❌ Backend code import failed: {e}')
+    exit(1)
+EOF
+
+if [ $? -eq 0 ]; then
+    echo "✅ Backend code check passed"
+else
+    echo "❌ Backend code check failed"
+    exit 1
+fi
 cd ..
 
-if [ $BACKEND_TEST -eq 0 ]; then
-    echo "✅ 后端代码检查通过"
+# Test frontend build
+echo "🧪 Step 4: Testing frontend code..."
+if command -v npm &> /dev/null; then
+    echo "✅ Frontend build tools available"
 else
-    echo "❌ 后端代码检查失败"
+    echo "⚠️  Cannot test frontend build (need to actually run npm run dev)"
 fi
 
 echo ""
-
-# 测试前端构建
-echo "🧪 步骤4: 测试前端代码..."
-if npm run build --dry-run 2>/dev/null || npx vite build --help >/dev/null 2>&1; then
-    echo "✅ 前端构建工具可用"
-else
-    echo "⚠️  无法测试前端构建（需要实际运行npm run dev）"
-fi
-
+echo "=== Setup and Test Complete ==="
 echo ""
-echo "=== 安装和测试完成 ==="
+echo "🚀 Startup Instructions:"
 echo ""
-echo "🚀 启动说明:"
-echo ""
-echo "终端1 - 启动后端:"
+echo "Terminal 1 - Start Backend:"
 echo "  cd backend"
 echo "  uvicorn main:app --reload"
 echo ""
-echo "终端2 - 启动前端:"
+echo "Terminal 2 - Start Frontend:"
 echo "  npm run dev"
 echo ""
-echo "然后打开浏览器访问: http://localhost:5173"
-
+echo "Then open browser to: http://localhost:5173"

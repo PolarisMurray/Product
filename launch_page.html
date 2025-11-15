@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioReport Copilot - 启动页面</title>
+    <title>BioReport Copilot - Launch Page</title>
     <style>
         * {
             margin: 0;
@@ -172,57 +172,57 @@
     <div class="container">
         <div class="logo">🧬</div>
         <h1>BioReport Copilot</h1>
-        <p class="subtitle">一键启动应用</p>
+        <p class="subtitle">One-Click Launch</p>
         
         <div class="status" id="status">
             <div class="status-item">
-                <span class="status-label">后端服务器</span>
-                <span class="status-value checking" id="backend-status">检查中...</span>
+                <span class="status-label">Backend Server</span>
+                <span class="status-value checking" id="backend-status">Checking...</span>
             </div>
             <div class="status-item">
-                <span class="status-label">前端服务器</span>
-                <span class="status-value checking" id="frontend-status">检查中...</span>
+                <span class="status-label">Frontend Server</span>
+                <span class="status-value checking" id="frontend-status">Checking...</span>
             </div>
         </div>
         
         <div class="instructions">
-            <h3>📋 使用说明</h3>
+            <h3>📋 Instructions</h3>
             <ol>
-                <li><strong>Windows用户</strong>: 双击 <code>启动应用.bat</code> 文件</li>
-                <li><strong>Mac/Linux用户</strong>: 双击 <code>启动应用.sh</code> 文件（或右键选择"打开"）</li>
-                <li>等待服务器启动完成</li>
-                <li>浏览器会自动打开应用</li>
+                <li><strong>Windows Users</strong>: Double-click <code>start_app.bat</code> file</li>
+                <li><strong>Mac/Linux Users</strong>: Double-click <code>start_app.sh</code> file (or right-click and select "Open")</li>
+                <li>Wait for servers to start</li>
+                <li>Browser will automatically open the application</li>
             </ol>
         </div>
         
         <div>
             <a href="http://localhost:5173" target="_blank" class="button" id="open-app-btn" style="display: none;">
-                🚀 打开应用
+                🚀 Open Application
             </a>
             <a href="http://localhost:8000/docs" target="_blank" class="button secondary">
-                📚 查看API文档
+                📚 View API Documentation
             </a>
         </div>
         
         <div class="links">
-            <a href="http://localhost:8000/health" target="_blank" class="link">🔍 后端健康检查</a>
-            <a href="http://localhost:5173" target="_blank" class="link">🌐 前端应用 (http://localhost:5173)</a>
-            <a href="http://localhost:8000" target="_blank" class="link">🔧 后端API (http://localhost:8000)</a>
+            <a href="http://localhost:8000/health" target="_blank" class="link">🔍 Backend Health Check</a>
+            <a href="http://localhost:5173" target="_blank" class="link">🌐 Frontend Application (http://localhost:5173)</a>
+            <a href="http://localhost:8000" target="_blank" class="link">🔧 Backend API (http://localhost:8000)</a>
         </div>
     </div>
     
     <script>
-        // 检查服务器状态
+        // Check server status
         async function checkBackend() {
             try {
                 const response = await fetch('http://localhost:8000/health');
                 if (response.ok) {
-                    document.getElementById('backend-status').textContent = '✅ 运行中';
+                    document.getElementById('backend-status').textContent = '✅ Running';
                     document.getElementById('backend-status').className = 'status-value success';
                     return true;
                 }
             } catch (e) {
-                document.getElementById('backend-status').textContent = '❌ 未运行';
+                document.getElementById('backend-status').textContent = '❌ Not Running';
                 document.getElementById('backend-status').className = 'status-value error';
             }
             return false;
@@ -232,25 +232,25 @@
             try {
                 const response = await fetch('http://localhost:5173');
                 if (response.ok) {
-                    document.getElementById('frontend-status').textContent = '✅ 运行中';
+                    document.getElementById('frontend-status').textContent = '✅ Running';
                     document.getElementById('frontend-status').className = 'status-value success';
                     document.getElementById('open-app-btn').style.display = 'inline-block';
                     return true;
                 }
             } catch (e) {
-                document.getElementById('frontend-status').textContent = '❌ 未运行';
+                document.getElementById('frontend-status').textContent = '❌ Not Running';
                 document.getElementById('frontend-status').className = 'status-value error';
             }
             return false;
         }
         
-        // 每2秒检查一次
+        // Check every 2 seconds
         setInterval(async () => {
             await checkBackend();
             await checkFrontend();
         }, 2000);
         
-        // 立即检查一次
+        // Check immediately
         checkBackend();
         checkFrontend();
     </script>

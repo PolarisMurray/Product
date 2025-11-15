@@ -19,12 +19,12 @@ function ActionButtons({ hasFiles, isGenerating, onGenerate }) {
         {isGenerating ? (
           <>
             <Loader2 className="w-6 h-6 animate-spin" />
-            <span>正在生成报告...</span>
+            <span>Generating report...</span>
           </>
         ) : (
           <>
             <FlaskConical className="w-6 h-6" />
-            <span>生成科研报告 Generate Report</span>
+            <span>Generate Report</span>
           </>
         )}
       </button>

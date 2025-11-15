@@ -14,7 +14,7 @@ function ResultView({ results }) {
     <div className="space-y-8">
       {/* Plot Cards Grid */}
       <div>
-        <h2 className="text-xl font-bold text-gray-900 mb-4">图表展示</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Charts</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {results.plots.map((plot) => (
             <div
@@ -32,8 +32,8 @@ function ResultView({ results }) {
                     <div className="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-research-blue-100 to-research-blue-200 rounded-lg flex items-center justify-center shadow-inner">
                       <span className="text-5xl">📊</span>
                     </div>
-                    <p className="text-sm font-medium">图表占位符</p>
-                    <p className="text-xs mt-1 text-gray-400">图表生成后将显示在此处</p>
+                    <p className="text-sm font-medium">Chart Placeholder</p>
+                    <p className="text-xs mt-1 text-gray-400">Chart will be displayed here after generation</p>
                   </div>
                 )}
               </div>
@@ -61,12 +61,12 @@ function ResultView({ results }) {
               {copiedSection === 'results' ? (
                 <>
                   <Check className="w-4 h-4" />
-                  <span className="text-sm">已复制</span>
+                  <span className="text-sm">Copied</span>
                 </>
               ) : (
                 <>
                   <Copy className="w-4 h-4" />
-                  <span className="text-sm">复制</span>
+                  <span className="text-sm">Copy</span>
                 </>
               )}
             </button>
@@ -75,7 +75,7 @@ function ResultView({ results }) {
             <textarea
               defaultValue={results.results}
               className="w-full h-64 p-4 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-research-blue-500 focus:border-transparent"
-              placeholder="自动生成的结果将显示在这里..."
+              placeholder="Auto-generated results will be displayed here..."
             />
           </div>
         </div>
@@ -91,12 +91,12 @@ function ResultView({ results }) {
               {copiedSection === 'discussion' ? (
                 <>
                   <Check className="w-4 h-4" />
-                  <span className="text-sm">已复制</span>
+                  <span className="text-sm">Copied</span>
                 </>
               ) : (
                 <>
                   <Copy className="w-4 h-4" />
-                  <span className="text-sm">复制</span>
+                  <span className="text-sm">Copy</span>
                 </>
               )}
             </button>
@@ -105,7 +105,7 @@ function ResultView({ results }) {
             <textarea
               defaultValue={results.discussion}
               className="w-full h-64 p-4 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-research-blue-500 focus:border-transparent"
-              placeholder="自动生成的讨论将显示在这里..."
+              placeholder="Auto-generated discussion will be displayed here..."
             />
           </div>
         </div>

@@ -1,11 +1,19 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+import os
 
 from routers.research import router as research_router
 from routers.personal import router as personal_router
 from routers.report import router as report_router
 
 app = FastAPI(title="BioReport Copilot")
+
+# Create static/reports directory if it doesn't exist
+os.makedirs("static/reports", exist_ok=True)
+
+# Mount static files directory for report downloads
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Configure CORS
 app.add_middleware(

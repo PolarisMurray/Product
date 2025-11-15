@@ -73,7 +73,7 @@ function ResearchMode() {
           {isGenerating && (
             <div className="space-y-8">
               <div>
-                <h2 className="text-xl font-bold text-gray-900 mb-4">图表展示</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-4">Charts</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <PlotCardSkeleton />
                   <PlotCardSkeleton />
@@ -105,7 +105,7 @@ function ResearchMode() {
           {!results && !isGenerating && uploadedFiles.length === 0 && (
             <div className="text-center py-16">
               <div className="inline-block p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-                <p className="text-gray-500 text-lg">请上传数据以开始分析</p>
+                <p className="text-gray-500 text-lg">Please upload data to start analysis</p>
               </div>
             </div>
           )}

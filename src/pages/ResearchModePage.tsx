@@ -63,8 +63,22 @@ function ResearchModePage() {
       // Call API
       const result = await analyzeResearch(formData);
       setResponse(result);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred while analyzing the data');
+    } catch (err: any) {
+      // Provide more detailed error information
+      let errorMessage = 'An error occurred while analyzing the data';
+      
+      if (err?.response) {
+        // Server returned an error response
+        errorMessage = `Server error: ${err.response.status} - ${err.response.data?.detail || err.response.statusText}`;
+      } else if (err?.request) {
+        // Request was sent but no response received (usually backend not running)
+        errorMessage = 'Cannot connect to backend server. Please ensure the backend server is running (http://localhost:8000)';
+      } else if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
+      console.error('API Error:', err);
     } finally {
       setIsLoading(false);
     }

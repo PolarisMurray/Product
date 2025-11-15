@@ -61,7 +61,7 @@ function FileUploadArea({ uploadedFiles, onFilesUpload, onFileRemove }) {
     }
 
     if (invalidFiles.length > 0) {
-      alert(`以下文件格式不支持: ${invalidFiles.join(', ')}\n支持格式: CSV, TSV, XLSX`)
+      alert(`Unsupported file formats: ${invalidFiles.join(', ')}\nSupported formats: CSV, TSV, XLSX`)
     }
   }, [uploadedFiles, onFilesUpload])
 
@@ -119,10 +119,10 @@ function FileUploadArea({ uploadedFiles, onFilesUpload, onFileRemove }) {
           </div>
           <div>
             <p className="text-lg font-medium text-gray-700">
-              拖拽文件至此，或点击上传
+              Drag files here or click to upload
             </p>
             <p className="text-sm text-gray-500 mt-2">
-              支持 CSV / TSV / XLSX
+              Supports CSV / TSV / XLSX
             </p>
           </div>
         </div>
@@ -131,7 +131,7 @@ function FileUploadArea({ uploadedFiles, onFilesUpload, onFileRemove }) {
       {/* Uploaded Files List */}
       {uploadedFiles.length > 0 && (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-          <h3 className="text-sm font-semibold text-gray-700 mb-3">已上传文件</h3>
+          <h3 className="text-sm font-semibold text-gray-700 mb-3">Uploaded Files</h3>
           <div className="space-y-2">
             {uploadedFiles.map((fileObj) => (
               <div
@@ -162,7 +162,7 @@ function FileUploadArea({ uploadedFiles, onFilesUpload, onFileRemove }) {
                 <button
                   onClick={() => onFileRemove(fileObj.id)}
                   className="ml-4 p-1 text-gray-400 hover:text-red-500 transition-colors flex-shrink-0"
-                  aria-label="删除文件"
+                  aria-label="Remove file"
                 >
                   <X className="w-5 h-5" />
                 </button>
